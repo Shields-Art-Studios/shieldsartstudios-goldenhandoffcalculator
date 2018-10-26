@@ -1,0 +1,49 @@
+<html>
+	<body>
+		<h1>Retiring Agent Calculator</h1><br />
+		Number of Repeat and Referral Clients per Year: <input type="number" value="0" class="repeat-referral"><br />
+		Average Commission: <input type="number" value="0" class="average-commission"><br />
+		<input type="checkbox" class="email-results"> Please email my results to me.<br />
+		<div class="email">Email Address: <input type="email"> <input type="button" value="Add another email"><br /></div>
+		<input type="button" value="Submit" id="submit-retire"><br />
+		
+		<h1>Adopting Agent Calculator</h1><br />
+		Number of Repeat and Referral Clients per Year: <input type="number" value="0" class="repeat-referral"><br />
+		Average Commission: <input type="number" value="0" class="average-commission"><br />
+		<input type="checkbox" class="email-results"> Please email my results to me.<br />
+		<div class="email">Email Address: <input type="email"> <input type="button" value="Add another email"><br /></div>
+		<input type="button" value="Submit" id="submit-adopt"><br />
+		
+		
+		
+		<h1 id="result">Result:</h1>
+		
+	</body>
+			<script>
+			// Update both form fields when a user changes the value.
+			var updateAll = function (e) {
+				var els = document.getElementsByClassName(e.currentTarget.className)
+				for (var i = 0; i < els.length; i++) {
+					els[i].value = e.currentTarget.value
+				}
+			}
+			
+			// Add event listeners to input
+			var repRefClients = document.getElementsByClassName("repeat-referral")
+			console.log(repRefClients)
+			for (var i = 0; i < repRefClients.length; i++) {
+				repRefClients[i].addEventListener("focusout", updateAll)
+			}
+			var avgCom = document.getElementsByClassName("average-commission")
+			for (var i = 0; i < avgCom.length; i++) {
+				avgCom[i].addEventListener("focusout", updateAll)
+			}
+			
+			document.getElementById("submit-retire").addEventListener("click", e => {
+				document.getElementById("result").innerHTML = "Result: " + (repRefClients[0].value * avgCom[0].value * 0.2 * 3)
+			})
+			document.getElementById("submit-adopt").addEventListener("click", e => {
+				document.getElementById("result").innerHTML = "Result: " + (repRefClients[0].value * avgCom[0].value * 0.8 * 3)
+			})
+		</script>
+</html>
