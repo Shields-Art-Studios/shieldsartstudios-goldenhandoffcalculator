@@ -1,0 +1,16 @@
+These calculations were supplied by Nick Krautter (http://thegoldenhandoff.com/) through his Google Sheets spreadsheet: https://docs.google.com/spreadsheets/d/1uabdddDX3hljEQyW82DPyR59QMr63GKQ19vAeB2IOrI/edit#gid=1643208842
+
+Retiring Agent Calculator:
+Number of Repeat and Referral Clients per Year * Average Commission * 0.2 * 3 = Net Profit
+
+Adopting Agent Calculator:
+Number of Repeat and Referral Clients per Year * Average Commission * 0.8 * 3 = Gross Profit
+Average Commission * Number of Repeat and Referral Clients per Year / 2 * 3 = Additional Income
+Gross Profit + Additional Income = Gross Profit to Adopting Agent
+
+
+
+number of repeat and referral clients per year * average commission * 0.8 * 3 = Gross Profit to retiring agent database over 3 years
+average commission * number of repeat and referal clients per year/2*3 = additional income: assumes one new client from every two deals from adopted database
+
+Gross profit to retiring agent database over 3 years + additional income: assumes one new client from every two deals from adopted database = gross profit to adopting agent over 3 years
