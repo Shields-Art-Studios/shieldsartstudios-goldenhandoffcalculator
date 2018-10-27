@@ -7,7 +7,7 @@
 		Average Commission: <input class="average-commission" type="number" value="0" />
 		<input id="emailCheck1" class="email-results" type="checkbox" /> Email my results to me.</p>
 
-		<div class="email" style="text-align: center; display: none;">Email Address: <input type="email" />
+		<div class="email" style="text-align: center; display: none;">Email Address: <input type="email" class="emailInput"/>
 		<input class="addEmail" type="button" value="Add another email" /></div>
 		<p style="text-align: center;"><input id="submit-retire" type="button" value="Submit" /></p>
 
@@ -16,12 +16,20 @@
 		Average Commission: <input class="average-commission" type="number" value="0" />
 		<input id="emailCheck2" class="email-results" type="checkbox" /> Email my results to me.</p>
 
-		<div class="email" style="text-align: center; display: none;">Email Address: <input type="email" />
+		<div class="email" style="text-align: center; display: none;">Email Address: <input type="email" class="emailInput"/>
 		<input class="addEmail" type="button" value="Add another email" /></div>
 		<p style="text-align: center;"><input id="submit-adopt" type="button" value="Submit" /></p>
 
 	</body>
 			<script>
+			// Make sure browsers with caching don't initialize checkboxes as "checked"
+			var checkboxes = document.getElementsByTagName('input')
+			for (var i=0; i<checkboxes.length; i++) {
+  			if (checkboxes[i].type == 'checkbox') {
+    			checkboxes[i].checked = false
+  			}
+			}
+
 			// Update both form fields when a user changes the value.
 			var updateAll = function (e) {
 				var els = document.getElementsByClassName(e.currentTarget.className)
@@ -65,16 +73,48 @@
 			document.getElementById("emailCheck2").addEventListener("change", toggleEmail)
 			document.getElementById("emailCheck1").addEventListener("change", toggleEmail)
 
-
+			// Send email and display results
 			document.getElementById("submit-retire").addEventListener("click", e => {
 				var res = "Result: $" + (repRefClients[0].value * avgCom[0].value * 0.2 * 3).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 				alert(res)
-				if (document.getElementById("emailCheck1").checked) Email.send("noReply@TheGoldenHandoff.com", document.getElementsByClassName("email")[0].value, "Retiring Agent Calculator Results", res + "\n<a href='http://thegoldenhandoff.com/calculator>Take the calculator again.</a>'")
+				if (document.getElementById("emailCheck1").checked == true) {
+					Email.send(
+						"jackrwoods@gmail.com",
+						document.getElementsByClassName("emailInput")[0].value,
+						"Retiring Agent Calculator Results",
+						res + "\n<a href='http://thegoldenhandoff.com/calculator'>Take the calculator again.</a>",
+						{token: "2c8b760e-53ea-42b5-86b5-afc2e76aa529", callback: function done(message) {
+							Email.send(
+								"jackrwoods@gmail.com",
+								document.getElementsByClassName("emailInput")[0].value,
+								"Sample Notification - Retiring Agent Calculator Results",
+								document.getElementsByClassName("emailInput")[0].value + " requested for their results to be emailed to them with server status message: "+message+". \n" + res + "\n<a href='http://thegoldenhandoff.com/calculator'>Take the calculator again.</a>",
+								{token: "2c8b760e-53ea-42b5-86b5-afc2e76aa529", callback: function done(message) { console.log(message) }}
+							)
+						}}
+					)
+				}
 			})
 			document.getElementById("submit-adopt").addEventListener("click", e => {
 				var res = "Result: $" + (repRefClients[0].value * avgCom[0].value * 0.8 * 3).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 				alert(res)
-				if (document.getElementById("emailCheck1").checked) Email.send("jackrwoods@gmail.com", document.getElementsByClassName("email")[0].value, "Retiring Agent Calculator Results", res + "\n<a href='http://thegoldenhandoff.com/calculator>Take the calculator again.</a>'", {token: "377a5397-d721-44e8-b9e2-830de7dc1213"})
+				if (document.getElementById("emailCheck2").checked == true) {
+					Email.send(
+						"jackrwoods@gmail.com",
+						document.getElementsByClassName("emailInput")[1].value,
+						"Retiring Agent Calculator Results",
+						res + "\n<a href='http://thegoldenhandoff.com/calculator'>Take the calculator again.</a>",
+						{token: "2c8b760e-53ea-42b5-86b5-afc2e76aa529", callback: function done(message) {
+							Email.send(
+								"jackrwoods@gmail.com",
+								document.getElementsByClassName("emailInput")[1].value,
+								"Sample Notification - Retiring Agent Calculator Results",
+								document.getElementsByClassName("emailInput")[1].value + " requested for their results to be emailed to them with server status message: "+message+". \n" + res + "\n<a href='http://thegoldenhandoff.com/calculator'>Take the calculator again.</a>",
+								{token: "2c8b760e-53ea-42b5-86b5-afc2e76aa529", callback: function done(message) { console.log(message) }}
+							)
+						}}
+					)
+				}
 			})
 		</script>
 </html>
