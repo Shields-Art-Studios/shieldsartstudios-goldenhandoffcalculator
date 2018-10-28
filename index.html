@@ -1,0 +1,120 @@
+<html>
+	<body>
+		<!-- This allows the calculator to send email --><script src="https://smtpjs.com/v2/smtp.js"></script>
+
+		<h2 style="text-align: center;">Retiring Agent Calculator</h2>
+		<p style="text-align: center;">Number of Repeat and Referral Clients per Year: <input class="repeat-referral" type="number" value="0" />
+		Average Commission: <input class="average-commission" type="number" value="0" />
+		<input id="emailCheck1" class="email-results" type="checkbox" /> Email my results to me.</p>
+
+		<div class="email" style="text-align: center; display: none;">Email Address: <input type="email" class="emailInput"/>
+		<input class="addEmail" type="button" value="Add another email" /></div>
+		<p style="text-align: center;"><input id="submit-retire" type="button" value="Submit" /></p>
+
+		<h2 style="text-align: center;">Adopting Agent Calculator</h2>
+		<p style="text-align: center;">Number of Repeat and Referral Clients per Year: <input class="repeat-referral" type="number" value="0" />
+		Average Commission: <input class="average-commission" type="number" value="0" />
+		<input id="emailCheck2" class="email-results" type="checkbox" /> Email my results to me.</p>
+
+		<div class="email" style="text-align: center; display: none;">Email Address: <input type="email" class="emailInput"/>
+		<input class="addEmail" type="button" value="Add another email" /></div>
+		<p style="text-align: center;"><input id="submit-adopt" type="button" value="Submit" /></p><br />
+		<p style="text-align: center;">Disclaimer: These calculators are meant to be an accurate guide but do not guarantee results as agent performance, client loyalty, and market changes can affect outcomes.</p>
+	</body>
+	<script>
+			// Make sure browsers with caching don't initialize checkboxes as "checked"
+			var checkboxes = document.getElementsByTagName('input')
+			for (var i=0; i<checkboxes.length; i++) {
+  			if (checkboxes[i].type == 'checkbox') {
+    			checkboxes[i].checked = false
+  			}
+			}
+
+			// Update both form fields when a user changes the value.
+			var updateAll = function (e) {
+				var els = document.getElementsByClassName(e.currentTarget.className)
+				for (var i = 0; i < els.length; i++) {
+					els[i].value = e.currentTarget.value
+				}
+			}
+
+			// Toggle email div visibility
+			var toggleEmail = function (e) {
+				var el = e.currentTarget
+				var div = null
+
+				// Choose the right div
+				if (el.id == "emailCheck1") {
+					div = document.getElementsByClassName("email")[0]
+				} else {
+					div = document.getElementsByClassName("email")[1]
+				}
+
+				// Toggle display
+				if (div.style.display == "none") div.style.display = "block"
+				else div.style.display = "none"
+			}
+
+			// Add event listeners to input
+			var repRefClients = document.getElementsByClassName("repeat-referral")
+			for (var i = 0; i < repRefClients.length; i++) {
+				repRefClients[i].addEventListener("change", updateAll)
+			}
+			var avgCom = document.getElementsByClassName("average-commission")
+			for (var i = 0; i < avgCom.length; i++) {
+				avgCom[i].addEventListener("change", updateAll)
+			}
+
+			var addEmailButtons = document.getElementsByClassName("addEmail")
+			for (var i = 0; i < addEmailButtons.length; i++) {
+				//addEmailButtons[i].addEventListener("click", addEmail)
+			}
+
+			document.getElementById("emailCheck2").addEventListener("change", toggleEmail)
+			document.getElementById("emailCheck1").addEventListener("change", toggleEmail)
+
+			// Send email and display results
+			document.getElementById("submit-retire").addEventListener("click", e => {
+				var res = "Result: $" + (repRefClients[0].value * avgCom[0].value * 0.2 * 3).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+				alert(res)
+				if (document.getElementById("emailCheck1").checked == true) {
+					Email.send(
+						"jackrwoods@gmail.com",
+						document.getElementsByClassName("emailInput")[0].value,
+						"Retiring Agent Calculator Results",
+						res + "\n<a href='http://thegoldenhandoff.com/calculator'>Take the calculator again.</a>",
+						{token: "477b5f16-fe5a-4bdf-ada3-c890905045e7", callback: function done(message) {
+							Email.send(
+								"jackrwoods@gmail.com",
+								document.getElementsByClassName("emailInput")[0].value,
+								"Sample Notification - Retiring Agent Calculator Results",
+								document.getElementsByClassName("emailInput")[0].value + " requested for their results to be emailed to them with server status message: "+message+". \n" + res + "\n<a href='http://thegoldenhandoff.com/calculator'>Take the calculator again.</a>",
+								{token: "477b5f16-fe5a-4bdf-ada3-c890905045e7", callback: function done(message) { console.log(message) }}
+							)
+						}}
+					)
+				}
+			})
+			document.getElementById("submit-adopt").addEventListener("click", e => {
+				var res = "Result: $" + (repRefClients[0].value * avgCom[0].value * 0.8 * 3).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+				alert(res)
+				if (document.getElementById("emailCheck2").checked == true) {
+					Email.send(
+						"jackrwoods@gmail.com",
+						document.getElementsByClassName("emailInput")[1].value,
+						"Retiring Agent Calculator Results",
+						res + "\n<a href='http://thegoldenhandoff.com/calculator'>Take the calculator again.</a>",
+						{token: "477b5f16-fe5a-4bdf-ada3-c890905045e7", callback: function done(message) {
+							Email.send(
+								"jackrwoods@gmail.com",
+								document.getElementsByClassName("emailInput")[1].value,
+								"Sample Notification - Retiring Agent Calculator Results",
+								document.getElementsByClassName("emailInput")[1].value + " requested for their results to be emailed to them with server status message: "+message+". \n" + res + "\n<a href='http://thegoldenhandoff.com/calculator'>Take the calculator again.</a>",
+								{token: "477b5f16-fe5a-4bdf-ada3-c890905045e7", callback: function done(message) { console.log(message) }}
+							)
+						}}
+					)
+				}
+			})
+	</script>
+</html>
