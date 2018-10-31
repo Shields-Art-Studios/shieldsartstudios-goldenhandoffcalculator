@@ -1,16 +1,21 @@
 <html>
+ <meta charset="UTF-8">
 	<body>
 		<!-- This allows the calculator to send email --><script src="https://smtpjs.com/v2/smtp.js"></script>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
+		<style>
+			table.table-bordered > tbody > tr > td{
+  			border: 1px solid #000;
+			}
+		</style>
 
 		<div class="container">
 			<h2 style="text-align: left;">Retiring Agent Calculator</h2>
 			<form>
-				<table class="table table-hover">
+				<table class="table table-hover table-bordered" style="border: 1px solid #000;">
 					<tbody>
 						<div class="form-group">
 							<tr>
@@ -30,14 +35,14 @@
 						</tr>
 						<tr>
 							<td><input type="email" class="form-control emailInput" placeholder="Enter email" id="emailInput1" required/></td>
-							<td><button class="btn btn-secondary" type="submit" id="submit-retire">Email My Results</button></td>
+							<td><button class="btn btn-secondary" type="button" id="submit-retire">Email My Results</button></td>
 						</tr>
 					</tbody>
 				</table>
 			</form>
 			<h2 style="text-align: left;">Adopting Agent Calculator</h2>
 			<form>
-				<table class="table table-hover">
+				<table class="table table-hover table-bordered" style="border: 1px solid #000;">
 					<tbody>
 						<div class="form-group">
 							<tr>
@@ -65,7 +70,7 @@
 						</tr>
 						<tr>
 							<td><input type="email" class="form-control emailInput" placeholder="Enter email" id="emailInput2" required/></td>
-							<td><button class="btn btn-secondary" type="submit" id="submit-adopt">Email My Results</button></td>
+							<td><button class="btn btn-secondary" type="button" id="submit-adopt">Email My Results</button></td>
 						</tr>
 					</tbody>
 				</table>
@@ -104,66 +109,62 @@
 
 			function updateCalculators() {
 				var retireProfit = document.getElementById("retire-results")
-				retireProfit.textContent = "$" + (repRefClients[0].value * avgCom[0].value * 0.2 * 3).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+				retireProfit.textContent = "$" + parseFloat(repRefClients[0].value * avgCom[0].value * 0.2 * 3).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 
 				var grossProfit = document.getElementById("grossProfit")
-				grossProfit.textContent = "$" + (repRefClients[1].value * avgCom[1].value * 0.8 * 3).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+				grossProfit.textContent = "$" + parseFloat(repRefClients[1].value * avgCom[1].value * 0.8 * 3).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 
 				var additionalIncome = document.getElementById("additionalIncome")
-				additionalIncome.textContent = "$" + (repRefClients[1].value * avgCom[1].value / 2 * 3).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+				additionalIncome.textContent = "$" + parseFloat(repRefClients[1].value * avgCom[1].value / 2 * 3).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 
 				var adoptResults = document.getElementById("adopt-results")
-				adoptResults.textContent = "$" + ((repRefClients[1].value * avgCom[1].value * 0.8 * 3) + (repRefClients[1].value * avgCom[1].value / 2 * 3)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+				adoptResults.textContent = "$" + parseFloat((repRefClients[1].value * avgCom[1].value * 0.8 * 3) + (repRefClients[1].value * avgCom[1].value / 2 * 3)).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 			}
 
 			// Send email and display results
 			document.getElementById("submit-retire").addEventListener("click", e => {
 				if (document.getElementById("emailInput1").checkValidity() == true) {
-					var res = "<h1>Results</h1><br /> <table> <tr> <td>"+repRefClients[0].value+"</td> <td>Number of Repeat and Referral Clients per Year</td> <tr> <td>"+avgCom[0].value+"</td> <td>Average Commission</td> </tr> <tr> <td>"+document.getElementById("retire-results").textContent+"</td> <td><b>Net Profit</b> to Retiring Agent Over 3 Years</td> </tr> </table>"
+					var res = "<h1>Results</h1><table style=\"border: 1px solid #000;\"> <tr> <td style=\"border: 1px solid #000;\">"+repRefClients[0].value+"</td> <td style=\"border: 1px solid #000;\">Number of Repeat and Referral Clients per Year</td> <tr> <td style=\"border: 1px solid #000;\">"+avgCom[0].value+"</td> <td style=\"border: 1px solid #000;\">Average Commission</td> </tr> <tr> <td style=\"border: 1px solid #000;\">"+document.getElementById("retire-results").textContent+"</td> <td style=\"border: 1px solid #000;\"><b>Net Profit</b> to Retiring Agent Over 3 Years</td> </tr> </table>"
 
 					// Send email with res
-					setTimeout(function() {
-						Email.send(
-							"jackrwoods@gmail.com",
-							document.getElementsByClassName("emailInput")[0].value,
-							"Retiring Agent Calculator Results",
-							res + "\n<a href='http://thegoldenhandoff.com/calculator'>Take the calculator again.</a>",
-							{token: "7f1e0e1c-26de-4453-b220-b4ad28cc017a", callback: function done(message) {
-								Email.send(
-									"jackrwoods@gmail.com",
-									document.getElementsByClassName("emailInput")[0].value,
-									"Sample Notification - Retiring Agent Calculator Results",
-									document.getElementsByClassName("emailInput")[0].value + " requested for their results to be emailed to them with server status message: "+message+". \n" + res + "\n<a href='http://thegoldenhandoff.com/calculator'>Take the calculator again.</a>",
-									{token: "7f1e0e1c-26de-4453-b220-b4ad28cc017a", callback: function done(message) { console.log(message) }}
-								)
-							}}
-						)
-					}, 0)
+					Email.send(
+						"jackrwoods@gmail.com",
+						document.getElementsByClassName("emailInput")[0].value,
+						"Retiring Agent Calculator Results",
+						res + "\n<a href='http://thegoldenhandoff.com/calculator'>Take the calculator again.</a>",
+						{token: "7f1e0e1c-26de-4453-b220-b4ad28cc017a", callback: function done(message) {
+							Email.send(
+								"jackrwoods@gmail.com",
+								document.getElementsByClassName("emailInput")[0].value,
+								"Sample Notification - Retiring Agent Calculator Results",
+								document.getElementsByClassName("emailInput")[0].value + " requested for their results to be emailed to them with server status message: "+message+". \n" + res + "\n<a href='http://thegoldenhandoff.com/calculator'>Take the calculator again.</a>",
+								{token: "7f1e0e1c-26de-4453-b220-b4ad28cc017a", callback: function done(message) { console.log(message) }}
+							)
+						}}
+					)
 
 				}
 			})
 			document.getElementById("submit-adopt").addEventListener("click", e => {
-				var res = "<h1>Results</h1><br />	<table> <tr> <td>"+repRefClients[1].value+"</td> <td>Number of Repeat and Referral Clients per Year</td> <tr> <td>"+avgCom[1].value+"</td> <td>Average Commission</td> </tr> <tr> <td>"+document.getElementById("grossProfit").textContent+"</td> <td>Gross Profit to Retiring Agent Database Over 3 Years</td> </tr> <tr> <td>"+document.getElementById("additionalIncome").textContent+"</td> <td>Additional Income</td> </tr> <tr> <td>"+document.getElementById("adopt-results").textContent+"</td> <td><b>Net Profit</b> to Retiring Agent Over 3 Years</td> </tr> </table>"
+				var res = "<h1>Results</h1><table style=\"border: 1px solid #000;\"> <tr> <td style=\"border: 1px solid #000;\">"+repRefClients[1].value+"</td> <td style=\"border: 1px solid #000;\">Number of Repeat and Referral Clients per Year</td> <tr> <td style=\"border: 1px solid #000;\">"+avgCom[1].value+"</td> <td style=\"border: 1px solid #000;\">Average Commission</td> </tr> <tr> <td style=\"border: 1px solid #000;\">"+document.getElementById("grossProfit").textContent+"</td> <td style=\"border: 1px solid #000;\">Gross Profit to Retiring Agent Database Over 3 Years</td> </tr> <tr> <td style=\"border: 1px solid #000;\">"+document.getElementById("additionalIncome").textContent+"</td> <td style=\"border: 1px solid #000;\">Additional Income</td> </tr> <tr> <td style=\"border: 1px solid #000;\">"+document.getElementById("adopt-results").textContent+"</td> <td style=\"border: 1px solid #000;\"><b>Net Profit</b> to Retiring Agent Over 3 Years</td> </tr> </table>"
 
 				if (document.getElementById("emailInput2").checkValidity() == true) {
 
-					setTimeout(function() {
-						Email.send(
-							"jackrwoods@gmail.com",
-							document.getElementsByClassName("emailInput")[1].value,
-							"Retiring Agent Calculator Results",
-							res + "<br /><a href='http://thegoldenhandoff.com/calculator'>Take the calculator again.</a>",
-							{token: "7f1e0e1c-26de-4453-b220-b4ad28cc017a", callback: function done(message) {
-								Email.send(
-									"jackrwoods@gmail.com",
-									document.getElementsByClassName("emailInput")[1].value,
-									"Sample Notification - Retiring Agent Calculator Results",
-									document.getElementsByClassName("emailInput")[1].value + " requested for their results to be emailed to them with server status message: "+message+". \n" + res + "\n<a href='http://thegoldenhandoff.com/calculator'>Take the calculator again.</a>",
-									{token: "7f1e0e1c-26de-4453-b220-b4ad28cc017a", callback: function done(message) { console.log(message) }}
-								)
-							}}
-						)
-					}, 0)
+					Email.send(
+						"jackrwoods@gmail.com",
+						document.getElementsByClassName("emailInput")[1].value,
+						"Retiring Agent Calculator Results",
+						res + "<br /><a href='http://thegoldenhandoff.com/calculator'>Take the calculator again.</a>",
+						{token: "7f1e0e1c-26de-4453-b220-b4ad28cc017a", callback: function done(message) {
+							Email.send(
+								"jackrwoods@gmail.com",
+								document.getElementsByClassName("emailInput")[1].value,
+								"Sample Notification - Retiring Agent Calculator Results",
+								document.getElementsByClassName("emailInput")[1].value + " requested for their results to be emailed to them with server status message: "+message+". \n" + res + "\n<a href='http://thegoldenhandoff.com/calculator'>Take the calculator again.</a>",
+								{token: "7f1e0e1c-26de-4453-b220-b4ad28cc017a", callback: function done(message) { console.log(message) }}
+							)
+						}}
+					)
 				}
 			})
 	</script>
