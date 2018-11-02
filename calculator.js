@@ -54,7 +54,7 @@ document.getElementById("submit-retire").addEventListener("click", e => {
         Email.send(
           "nkrautter@gmail.com",
           "nick.krautter@followupboss.me",
-          "Sample Notification - Retiring Agent Calculator Results",
+          "Notification - Retiring Agent Calculator Results",
           document.getElementsByClassName("emailInput")[0].value + " requested for their results to be emailed to them with server status message: "+message+". \n" + res + "\n<a href='http://thegoldenhandoff.com/calculator'>Take the calculator again.</a>",
           {token: "7f1e0e1c-26de-4453-b220-b4ad28cc017a", callback: function done(message) { alert("Email sent successfully."); console.log(message); }}
         )
@@ -77,7 +77,7 @@ document.getElementById("submit-adopt").addEventListener("click", e => {
         Email.send(
           "nkrautter@gmail.com",
           "nick.krautter@followupboss.me",
-          "Sample Notification - Retiring Agent Calculator Results",
+          "Notification - Retiring Agent Calculator Results",
           document.getElementsByClassName("emailInput")[1].value + " requested for their results to be emailed to them with server status message: "+message+". \n" + res + "\n<a href='http://thegoldenhandoff.com/calculator'>Take the calculator again.</a>",
           {token: "7f1e0e1c-26de-4453-b220-b4ad28cc017a", callback: function done(message) { alert("Email sent successfully."); console.log(message); }}
         )
