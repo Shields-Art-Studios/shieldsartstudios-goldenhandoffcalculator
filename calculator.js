@@ -51,16 +51,37 @@ document.getElementById("submit-retire").addEventListener("click", e => {
       "Retiring Agent Calculator Results",
       res + "\n<a href='http://thegoldenhandoff.com/calculator'>Take the calculator again.</a>",
       {token: "7f1e0e1c-26de-4453-b220-b4ad28cc017a", callback: function done(message) {
-        Email.send(
-          "nkrautter@gmail.com",
-          "nick.krautter@followupboss.me",
-          "Notification - Retiring Agent Calculator Results",
-          document.getElementsByClassName("emailInput")[0].value + " requested for their results to be emailed to them with server status message: "+message+". \n" + res + "\n<a href='http://thegoldenhandoff.com/calculator'>Take the calculator again.</a>",
-          {token: "7f1e0e1c-26de-4453-b220-b4ad28cc017a", callback: function done(message) { alert("Email sent successfully."); console.log(message); }}
-        )
+        console.log("Server message: " + message)
+        var data = JSON.stringify({
+          "source": "Golden Handoff Calculator",
+          "type": "General Inquiry",
+          "message": document.getElementsByClassName("emailInput")[1].value + " requested for their results to be emailed to them with server status message: OK. \n" + res + "\n<a href='http://thegoldenhandoff.com/calculator'>Take the calculator again.</a>",
+          "description": "Notification - Retiring Agent Calculator Results",
+          "person": {
+            "emails": [ { "value": document.getElementsByClassName("emailInput")[1].value, "type": "home" } ],
+            "tags": [ "calculator" ],
+            "sourceUrl": "http://thegoldenhandoff.com/calculator/",
+          },
+          "campaign": {
+            "source": "Golden Handoff Calculator",
+            "medium": "referral"
+          }
+        })
+
+        var xhr = new XMLHttpRequest()
+        xhr.addEventListener("readystatechange", function () {
+          if (this.readyState === this.DONE) {
+            console.log("Lead added with status: " + this.status + " and message: ")
+            console.log(JSON.parse(this.responseText))
+          }
+         })
+
+        xhr.open("POST", "https://api.followupboss.com/v1/events")
+        xhr.setRequestHeader('Authorization', 'Basic ' + btoa('483fb0459ff828db2f8962ac6053ca28f79c07:'))
+        xhr.setRequestHeader('Content-Type', 'application/json')
+        xhr.send(data)
       }}
     )
-
   }
 })
 document.getElementById("submit-adopt").addEventListener("click", e => {
@@ -74,13 +95,36 @@ document.getElementById("submit-adopt").addEventListener("click", e => {
       "Retiring Agent Calculator Results",
       res + "<br /><a href='http://thegoldenhandoff.com/calculator'>Take the calculator again.</a>",
       {token: "7f1e0e1c-26de-4453-b220-b4ad28cc017a", callback: function done(message) {
-        Email.send(
-          "nkrautter@gmail.com",
-          "nick.krautter@followupboss.me",
-          "Notification - Retiring Agent Calculator Results",
-          document.getElementsByClassName("emailInput")[1].value + " requested for their results to be emailed to them with server status message: "+message+". \n" + res + "\n<a href='http://thegoldenhandoff.com/calculator'>Take the calculator again.</a>",
-          {token: "7f1e0e1c-26de-4453-b220-b4ad28cc017a", callback: function done(message) { alert("Email sent successfully."); console.log(message); }}
-        )
+
+        console.log("Server message: " + message)
+        var data = JSON.stringify({
+          "source": "Golden Handoff Calculator",
+          "type": "General Inquiry",
+          "message": document.getElementsByClassName("emailInput")[1].value + " requested for their results to be emailed to them with server status message: OK. \n" + res + "\n<a href='http://thegoldenhandoff.com/calculator'>Take the calculator again.</a>",
+          "description": "Notification - Retiring Agent Calculator Results",
+          "person": {
+            "emails": [ { "value": document.getElementsByClassName("emailInput")[1].value, "type": "home" } ],
+            "tags": [ "calculator" ],
+            "sourceUrl": "http://thegoldenhandoff.com/calculator/",
+          },
+          "campaign": {
+            "source": "Golden Handoff Calculator",
+            "medium": "referral"
+          }
+        })
+
+        var xhr = new XMLHttpRequest()
+        xhr.addEventListener("readystatechange", function () {
+          if (this.readyState === this.DONE) {
+            console.log("Lead added with status: " + this.status + " and message: ")
+            console.log(JSON.parse(this.responseText))
+          }
+         })
+
+        xhr.open("POST", "https://api.followupboss.com/v1/events")
+        xhr.setRequestHeader('Authorization', 'Basic ' + btoa('483fb0459ff828db2f8962ac6053ca28f79c07:'))
+        xhr.setRequestHeader('Content-Type', 'application/json')
+        xhr.send(data)
       }}
     )
   }
