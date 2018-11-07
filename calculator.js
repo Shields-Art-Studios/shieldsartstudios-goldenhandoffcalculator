@@ -62,6 +62,7 @@ document.getElementById("submit-retire").addEventListener("click", e => {
             "emails": [ { "value": document.getElementsByClassName("emailInput")[1].value, "type": "home" } ],
             "tags": [ "calculator" ],
             "sourceUrl": "http://thegoldenhandoff.com/calculator/",
+            "assignedTo" : "Nick Krautter"
           },
           "campaign": {
             "source": "Golden Handoff Calculator",
@@ -108,6 +109,7 @@ document.getElementById("submit-adopt").addEventListener("click", e => {
             "emails": [ { "value": document.getElementsByClassName("emailInput")[1].value, "type": "home" } ],
             "tags": [ "calculator" ],
             "sourceUrl": "http://thegoldenhandoff.com/calculator/",
+            "assignedTo" : "Nick Krautter"
           },
           "campaign": {
             "source": "Golden Handoff Calculator",
