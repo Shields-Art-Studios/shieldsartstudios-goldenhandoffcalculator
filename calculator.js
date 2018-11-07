@@ -1,6 +1,6 @@
 // Use this nifty ASCII table generator to make a table of values
 function generateTable(input) {
-  var table = new AsciiTable('Results')
+  var table = new window.AsciiTable('Results')
   if (input === 1) {
     table.addRow(repRefClients[0].value, 'Number of Repeat and Referral Clients per Year')
     table.addRow(avgCom[0].value, 'Average Commission')
