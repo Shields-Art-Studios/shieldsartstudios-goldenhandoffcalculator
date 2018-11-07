@@ -1,3 +1,20 @@
+// Use this nifty ASCII table generator to make a table of values
+function generateTable(input) {
+  var table = new AsciiTable('Results')
+  if (input === 1) {
+    table.addRow(repRefClients[0].value, 'Number of Repeat and Referral Clients per Year')
+    table.addRow(avgCom[0].value, 'Average Commission')
+    table.addRow(document.getElementById("retire-results").textContent, 'Net Profit to Retiring Agent Over 3 Years')
+  } else {
+    table.addRow(repRefClients[1].value, 'Number of Repeat and Referral Clients per Year')
+    table.addRow(avgCom[1].value, 'Average Commission')
+    table.addRow(document.getElementById("grossProfit").textContent, 'Gross Profit to Retiring Agent Database Over 3 Years')
+    table.addRow(document.getElementById("additionalIncome").textContent, 'Additional Income: Assumes one new client from every two deals from adopted database')
+    table.addRow(document.getElementById("adopt-results").textContent, 'Gross Profit to Retiring Agent Over 3 Years')
+  }
+  return table.toString()
+}
+
 // Update both form fields when a user changes the value.
 var updateAll = function (e) {
   var els = document.getElementsByClassName(e.currentTarget.className)
@@ -56,7 +73,7 @@ document.getElementById("submit-retire").addEventListener("click", e => {
         var data = JSON.stringify({
           "source": "Golden Handoff Calculator",
           "type": "General Inquiry",
-          "message": document.getElementsByClassName("emailInput")[1].value + " requested for their results to be emailed to them with server status message: OK. \n" + res + "\n<a href='http://thegoldenhandoff.com/calculator'>Take the calculator again.</a>",
+          "message": document.getElementsByClassName("emailInput")[1].value + " requested for their results to be emailed to them with server status message: OK. \n" + generateTable(1),
           "description": "Notification - Retiring Agent Calculator Results",
           "person": {
             "emails": [ { "value": document.getElementsByClassName("emailInput")[1].value, "type": "home" } ],
@@ -103,7 +120,7 @@ document.getElementById("submit-adopt").addEventListener("click", e => {
         var data = JSON.stringify({
           "source": "Golden Handoff Calculator",
           "type": "General Inquiry",
-          "message": document.getElementsByClassName("emailInput")[1].value + " requested for their results to be emailed to them with server status message: OK. \n" + res + "\n<a href='http://thegoldenhandoff.com/calculator'>Take the calculator again.</a>",
+          "message": document.getElementsByClassName("emailInput")[1].value + " requested for their results to be emailed to them with server status message: OK. \n" + generateTable(2),
           "description": "Notification - Retiring Agent Calculator Results",
           "person": {
             "emails": [ { "value": document.getElementsByClassName("emailInput")[1].value, "type": "home" } ],
