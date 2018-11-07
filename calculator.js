@@ -52,6 +52,7 @@ document.getElementById("submit-retire").addEventListener("click", e => {
       res + "\n<a href='http://thegoldenhandoff.com/calculator'>Take the calculator again.</a>",
       {token: "7f1e0e1c-26de-4453-b220-b4ad28cc017a", callback: function done(message) {
         console.log("Server message: " + message)
+        alert("Email sent successfully.")
         var data = JSON.stringify({
           "source": "Golden Handoff Calculator",
           "type": "General Inquiry",
@@ -97,6 +98,7 @@ document.getElementById("submit-adopt").addEventListener("click", e => {
       {token: "7f1e0e1c-26de-4453-b220-b4ad28cc017a", callback: function done(message) {
 
         console.log("Server message: " + message)
+        alert("Email sent successfully.")
         var data = JSON.stringify({
           "source": "Golden Handoff Calculator",
           "type": "General Inquiry",
