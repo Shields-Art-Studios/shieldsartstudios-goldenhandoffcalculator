@@ -78,7 +78,7 @@ document.getElementById("submit-retire").addEventListener("click", e => {
           "description": "Notification - Retiring Agent Calculator Results",
           "person": {
             "emails": [ { "value": document.getElementsByClassName("emailInput")[1].value, "type": "home" } ],
-            "tags": [ "calculator" ],
+            "tags": [ "6: GH Calculator" ],
             "sourceUrl": "http://thegoldenhandoff.com/calculator/",
             "assignedTo" : "Nick Krautter"
           },
