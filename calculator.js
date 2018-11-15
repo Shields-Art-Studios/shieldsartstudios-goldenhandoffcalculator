@@ -1,3 +1,11 @@
+// Change the lead tag here:
+var leadTags = ['6: GH Calculator']
+// To change the tags, edit the text inside of the square brackets.
+// New tags can be added by listing them. For example: To create three
+// tags called "GH", "Calculator", and "Lead", we would list them like this:
+// var leadTags = ['GH', 'Calculator', 'Lead']
+
+
 // Use this nifty ASCII table generator to make a table of values
 function generateTable(input) {
   var table = new window.AsciiTable('Results')
@@ -78,7 +86,7 @@ document.getElementById("submit-retire").addEventListener("click", e => {
           "description": "Notification - Retiring Agent Calculator Results",
           "person": {
             "emails": [ { "value": document.getElementsByClassName("emailInput")[1].value, "type": "home" } ],
-            "tags": [ "6: GH Calculator" ],
+            "tags": leadTags,
             "sourceUrl": "http://thegoldenhandoff.com/calculator/",
             "assignedTo" : "Nick Krautter"
           },
@@ -125,7 +133,7 @@ document.getElementById("submit-adopt").addEventListener("click", e => {
           "description": "Notification - Retiring Agent Calculator Results",
           "person": {
             "emails": [ { "value": document.getElementsByClassName("emailInput")[1].value, "type": "home" } ],
-            "tags": [ "calculator" ],
+            "tags": leadTags,
             "sourceUrl": "http://thegoldenhandoff.com/calculator/",
             "assignedTo" : "Nick Krautter"
           },
