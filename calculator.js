@@ -115,7 +115,8 @@ document.getElementById("submit-retire").addEventListener("click", e => {
 document.getElementById("submit-adopt").addEventListener("click", e => {
   var res = "<h1>Results</h1><table style=\"border: 1px solid #000;\"> <tr> <td style=\"border: 1px solid #000;\">"+repRefClients[1].value+"</td> <td style=\"border: 1px solid #000;\">Number of Repeat and Referral Clients per Year</td> <tr> <td style=\"border: 1px solid #000;\">"+avgCom[1].value+"</td> <td style=\"border: 1px solid #000;\">Average Commission</td> </tr> <tr> <td style=\"border: 1px solid #000;\">"+document.getElementById("grossProfit").textContent+"</td> <td style=\"border: 1px solid #000;\">Gross Profit to Adopting Agent, Database Only, Over 3 Years</td> </tr> <tr> <td style=\"border: 1px solid #000;\">"+document.getElementById("additionalIncome").textContent+"</td> <td style=\"border: 1px solid #000;\">Additional Income:: Assumes one new client from every two deals from adopted database</td> </tr> <tr> <td style=\"border: 1px solid #000;\">"+document.getElementById("adopt-results").textContent+"</td> <td style=\"border: 1px solid #000;\"><b>Total Gross Profit</b> to Adopting Agent Over 3 Years</td> </tr> </table>"
   if (document.getElementById("emailInput2").checkValidity() == true) {
-
+  <br> Disclaimer: These calculators are meant to be an accurate guide but do not guarantee results as agent performance, client loyalty, and market changes can affect outcomes.
+    
     Email.send(
       "nkrautter@gmail.com",
       document.getElementsByClassName("emailInput")[1].value,
