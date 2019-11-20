@@ -16,9 +16,9 @@ function generateTable(input) {
   } else {
     table.addRow(repRefClients[1].value, 'Number of Repeat and Referral Clients per Year')
     table.addRow(avgCom[1].value, 'Average Commission')
-    table.addRow(document.getElementById("grossProfit").textContent, 'Gross Profit to Retiring Agent Database Over 3 Years')
-    table.addRow(document.getElementById("additionalIncome").textContent, 'Additional Income')
-    table.addRow(document.getElementById("adopt-results").textContent, 'Gross Profit to Retiring Agent Over 3 Years')
+    table.addRow(document.getElementById("grossProfit").textContent, 'Gross Profit to Adopting Agent, Database Over, 3 Years')
+    table.addRow(document.getElementById("additionalIncome").textContent, 'Additional Income: Assumes one new client from every two deals from adopted database')
+    table.addRow(document.getElementById("adopt-results").textContent, 'Gross Profit to Adopting Agent Over 3 Years')
   }
   console.log(table.toString())
   return table.toString()
